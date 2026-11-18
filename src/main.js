@@ -161,15 +161,18 @@ const STAT_LABEL = { hp: 'HP', atk: 'Atk', def: 'Def', spa: 'SpA', spd: 'SpD', s
 function draftCard(set, i) {
   const s = dex.species.get(set.species); const ab = dex.abilities.get(set.ability); const it = dex.items.get(set.item);
   const order = picks.indexOf(i);
-  return h('div', { class: 'card' + (order >= 0 ? ' picked' : ''), role: 'button', tabindex: '0', 'aria-pressed': String(order >= 0), onclick: () => togglePick(i),
-      onkeydown: e => { if ((e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); togglePick(i); } } },
+  const full = picks.length >= NPICK;
+  return h('div', { class: 'card' + (order >= 0 ? ' picked' : '') },
     order >= 0 ? h('div', { class: 'badge' }, order === 0 ? 'Lead' : '#' + (order + 1)) : null,
     h('div', { class: 'chead' }, sprite(set.species), h('div', {}, h('div', { class: 'cname' }, set.species), h('div', {}, s.types.map(typeChip)))),
     h('button', { class: 'kv', title: ab.shortDesc, onclick: e => showInfo('ability', ab.id, e) }, h('b', {}, 'Ability '), ab.name, h('span', { class: 'idot' }, 'i')),
     h('button', { class: 'kv', title: it.shortDesc, onclick: e => showInfo('item', it.id, e) }, h('b', {}, 'Item '), it.name, h('span', { class: 'idot' }, 'i')),
     h('ul', { class: 'moves' }, set.moves.map(moveRow)),
     h('div', { class: 'stats' }, Object.entries(s.baseStats).map(([k, v]) => h('div', { class: 'stat' }, h('span', {}, STAT_LABEL[k]),
-      h('i', { style: `width:${Math.min(100, v / 1.6)}%;--c:${v >= 110 ? '#4caf7d' : v >= 80 ? '#c9b43b' : '#d0674a'}` }), h('em', {}, v)))));
+      h('i', { style: `width:${Math.min(100, v / 1.6)}%;--c:${v >= 110 ? '#4caf7d' : v >= 80 ? '#c9b43b' : '#d0674a'}` }), h('em', {}, v)))),
+    order >= 0
+      ? h('button', { class: 'pick ghost', 'aria-pressed': 'true', onclick: () => togglePick(i) }, `✓ ${order === 0 ? 'Lead' : 'Pick #' + (order + 1)} · Remove`)
+      : h('button', { class: 'pick primary', 'aria-pressed': 'false', disabled: full, onclick: () => togglePick(i) }, full ? 'Team full' : `Select ${set.species}`));
 }
 function togglePick(i) {
   const k = picks.indexOf(i);
@@ -177,7 +180,7 @@ function togglePick(i) {
   const y = window.scrollY;
   draft();
   window.scrollTo(0, y); // stay where the player was instead of jumping to the top
-  const card = app.querySelectorAll('.grid .card')[i]; if (card) card.focus({ preventScroll: true });
+  const btn = app.querySelectorAll('.grid .card')[i]?.querySelector('.pick'); if (btn && !btn.disabled) btn.focus({ preventScroll: true });
 }
 function draft() {
   const full = picks.length === NPICK;

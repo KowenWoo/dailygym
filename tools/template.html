@@ -36,12 +36,12 @@ header{display:flex;justify-content:space-between;align-items:center;padding:6px
 .drafthead{display:flex;align-items:baseline;gap:14px;margin:22px 0 10px;flex-wrap:wrap}.drafthead h2{margin:0;font-family:"Press Start 2P",monospace;font-size:15px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .card{position:relative;text-align:left;background:var(--panel);border:2px solid var(--line);border-radius:var(--r);padding:12px;transition:border-color .15s,transform .15s}
-.card:hover{border-color:#4a5a85;transform:translateY(-2px)}.card.picked{border-color:var(--acc);background:linear-gradient(180deg,#2a2a1a,var(--panel) 40%)}
+.card.picked{border-color:var(--acc);background:linear-gradient(180deg,#2a2a1a,var(--panel) 40%)}
 .badge{position:absolute;top:10px;right:10px;background:var(--acc);color:#1b1404;font-weight:700;font-size:12px;padding:2px 9px;border-radius:999px}
 .chead{display:flex;align-items:center;gap:6px}.chead .spr{width:72px;height:72px;margin:-6px 0 -6px -8px}.cname{font-weight:700;font-size:17px}
 .kv{display:flex;align-items:center;width:100%;text-align:left;font-size:13px;margin-top:4px;padding:2px 4px;border-radius:6px}.kv:hover{background:rgba(255,255,255,.06)}.kv b{color:var(--muted);font-weight:500;margin-right:4px}
 .idot{margin-left:auto;width:15px;height:15px;flex:0 0 15px;border-radius:50%;border:1px solid currentColor;font:italic 700 10px/13px Georgia,serif;text-align:center;opacity:.55}
-.card:focus-visible{outline:2px solid var(--acc);outline-offset:2px}.card{cursor:pointer}
+.pick{display:block;width:100%;margin-top:10px;padding:11px 14px}.pick.ghost{border:2px solid var(--acc);color:var(--acc);border-radius:999px;font-weight:700}.pick:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .moves{list-style:none;margin:8px 0;padding:0;display:grid;gap:4px}
 .moves li{list-style:none}.mv{width:100%;text-align:left;cursor:pointer;display:flex;align-items:center;gap:6px;background:color-mix(in srgb,var(--c) 22%,transparent);border-left:4px solid var(--c);padding:4px 8px;border-radius:6px;font-size:13px}
 .mv:hover{filter:brightness(1.2)}.mv .idot{margin-left:2px}.mname{flex:1}.mcat{font-size:10px;font-weight:700;width:16px;height:16px;display:grid;place-items:center;border-radius:4px}
