@@ -44,6 +44,8 @@ for (const l of leaders) if (TYPE[l.name]) l.type = TYPE[l.name];
 const CH_TYPE = { Blue: 'Mixed', Wallace: 'Water', Lance: 'Dragon', Cynthia: 'Mixed', Alder: 'Mixed', Iris: 'Dragon' }; // champions win over gym/E4 entries of the same name
 for (const l of leaders) if (l.role === 'Champion') l.type = CH_TYPE[l.name];
 if (errs.length) { console.error(errs); process.exit(1); }
+const MIN_TEAM = 3; // 2-Pokémon leaders make for too short a draft and battle
+const kept = leaders.filter(l => l.team.length >= MIN_TEAM); leaders.length = 0; leaders.push(...kept);
 fs.writeFileSync('src/leaders.json', JSON.stringify(leaders));
 console.log(leaders.length, 'leaders');
 for (const l of leaders) console.log(l.role.padEnd(11), l.name.padEnd(12), l.game.padEnd(22), l.type.padEnd(9), l.team.map(m => `${m.species}${m.level}[${m.ability}]`).join(' '));
