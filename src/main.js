@@ -174,7 +174,10 @@ function draftCard(set, i) {
 function togglePick(i) {
   const k = picks.indexOf(i);
   if (k >= 0) picks.splice(k, 1); else if (picks.length < NPICK) picks.push(i);
+  const y = window.scrollY;
   draft();
+  window.scrollTo(0, y); // stay where the player was instead of jumping to the top
+  const card = app.querySelectorAll('.grid .card')[i]; if (card) card.focus({ preventScroll: true });
 }
 function draft() {
   const full = picks.length === NPICK;
