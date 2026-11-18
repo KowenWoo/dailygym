@@ -1,0 +1,26 @@
+{
+  "name": "dailygym",
+  "version": "1.0.0",
+  "description": "Daily Pok\u00e9mon gym leader battle game (Gen 1\u20135, randomized draft, Showdown engine)",
+  "scripts": {
+    "build": "node tools/build.mjs",
+    "sim-test": "node --no-warnings tools/sim_test.mjs 200",
+    "rand-test": "node --no-warnings tools/test_rand.mjs",
+    "data:fetch": "bash tools/fetch_vendor.sh",
+    "data:leaders": "python3 tools/extract_pret.py && node --no-warnings tools/build_leaders.mjs",
+    "data:sprites": "node --no-warnings tools/build_sprites.mjs",
+    "serve": "npx --yes serve dist -l 5173",
+    "data:anims": "node tools/build_ps_anims.mjs",
+    "anim-test": "esbuild tools/test/anim_entry.js --bundle --format=iife --outfile=tools/test/anim_bundle.js --log-level=error && echo \"open tools/test/anim_test.html and run runAll() in the console\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@pkmn/sim": "^0.11.0",
+    "esbuild": "^0.28.2",
+    "jquery": "^3.8.0"
+  },
+  "private": true,
+  "type": "module"
+}

@@ -1,0 +1,10 @@
+<!doctype html>
+<!-- Dev page: open after `npm run anim-test`, then in the console: await runAll()  (runs every move animation, reports errors)
+     or playOne('thunderbolt', 'p1', 'p2') to watch one at real speed. -->
+<div class="field" style="position:relative;width:1046px;height:360px;overflow:hidden;background:linear-gradient(#8fb9d6 0 47%,#7aa35a 47%)">
+  <div class="arena" style="position:absolute;inset:0"></div>
+  <div class="mon p2" style="position:absolute;right:96px;top:46px"><img style="width:150px;height:150px;background:#c33"></div>
+  <div class="mon p1" style="position:absolute;left:56px;bottom:22px"><img style="width:190px;height:190px;background:#33c"></div>
+</div>
+<style>.psfx{position:absolute;inset:0;z-index:3;pointer-events:none}.psfx>*{position:absolute}.psbg{position:absolute;inset:0;z-index:1}.psbg .background{position:absolute;inset:0}.mon{z-index:2}</style>
+<script src="anim_bundle.js"></script>
